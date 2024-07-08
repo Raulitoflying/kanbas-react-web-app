@@ -1,12 +1,21 @@
 import React from "react";
-import Labs from "./Labs";
+import Kanbas from "./Kanbas";
+import { HashRouter, Route, Routes, Navigate } from "react-router-dom";
+
 function App() {
   return (
-    <div className="App">
-      <h1>Welcome to Web Dev</h1>
-      <h2>Yixiang Zhou/Raul</h2>
-      <Labs />
-    </div>
+    <HashRouter>
+      <div>
+        <Routes>
+          <Route path="/" element={<Navigate to="/Kanbas" />} />
+          <Route path="/Kanbas/*" element={<Kanbas />} />
+        </Routes>
+        <a href="https://github.com/Raulitoflying/kanbas-react-web-app/tree/a1">
+          Github
+        </a>
+      </div>
+    </HashRouter>
   );
 }
+
 export default App;
