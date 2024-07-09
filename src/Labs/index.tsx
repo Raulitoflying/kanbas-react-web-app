@@ -5,6 +5,7 @@ import Lab3 from "./Lab3";
 import KanbasNavigation from '../Kanbas';
 import TOC from "./TOC";
 
+
 export default function Labs() {
   return (
     <div>

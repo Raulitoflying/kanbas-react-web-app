@@ -4,6 +4,7 @@ import './Status.css';
 
 export default function CourseStatus() {
   return (
+    
     <div id="wd-course-status">
       <h2>Course Status</h2>
       <div className="button-row">
