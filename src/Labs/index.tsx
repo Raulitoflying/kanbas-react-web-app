@@ -4,6 +4,7 @@ import Lab2 from "./Lab2";
 import Lab3 from "./Lab3";
 import TOC from "./TOC";
 
+
 export default function Labs() {
   return (
     <div>
