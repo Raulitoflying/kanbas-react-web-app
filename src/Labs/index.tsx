@@ -19,7 +19,7 @@ export default function Labs() {
         <Route path="/Lab2" element={<Lab2 />} />
         <Route path="/Lab3" element={<Lab3 />} />
       </Routes>
-      <a id="wd-github" href="https://github.com/Raulitoflying/kanbas-react-web-app/tree/a1">
+      <a id="wd-github" href="https://github.com/Raulitoflying/kanbas-react-web-app/tree/a2">
         GitHub
       </a>
     </div>
