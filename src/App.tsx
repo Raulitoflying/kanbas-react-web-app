@@ -14,7 +14,7 @@ function App() {
           <Route path="/LandingPage" element={<LandingPage />} />
           <Route path="/Labs/*" element={<Labs />} />
         </Routes>
-        <a href="https://github.com/thisissophiawang/kanbas-react-web-app/tree/a1">Github</a>
+        <a href="https://github.com/Raulitoflying/kanbas-react-web-app/tree/a2">Github</a>
       </div>
     </HashRouter>
   );
