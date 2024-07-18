@@ -9,7 +9,6 @@ export default function Paragraphs() {
         sentences. To force the browser to add vertical spacing, wrap the
         paragraphs you want to separate with the paragraph tag
       </p>
-      
 
       <p>
         This is the first paragraph. The paragraph tag is used to format
