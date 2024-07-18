@@ -5,7 +5,6 @@ export default function Tables() {
       <table border={1} width="100%">
         <thead>
           <tr>
-            
             <th>Quiz</th> {/* table heading*/}
             <th>Topic</th>
             <th>Date</th>
