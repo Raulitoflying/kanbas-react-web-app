@@ -1,5 +1,4 @@
 // src/Kanbas/Courses/Modules/index.tsx
-
 import React from 'react';
 import './Modules.css'; // Make sure to create this CSS file with the provided styles.
 
