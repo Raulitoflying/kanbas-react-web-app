@@ -6,9 +6,8 @@ export default function Anchors() {
       <a href="https://www.lipsum.com">click here</a>
       to get dummy text
       <br />
-      
       <h4>My GitHub repository</h4>
-      <a href="https://github.com/Raulitoflying/kanbas-react-web-app">
+      <a href="https://github.com/Raulitoflying/kanbas-react-web-app/tree/a1/">
         GitHub
       </a>
     </div>
