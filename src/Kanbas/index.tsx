@@ -3,11 +3,9 @@ import Courses from "./Courses";
 import Dashboard from "./Dashboard";
 import KanbasNavigation from "./Navigation";
 
-
 export default function Kanbas() {
   return (
     <div id="wd-kanbas">
-      <h1>Yixiang Zhou/Raul</h1>
       <table border={1} width="100%">
         <tr>
           <td valign="top">
