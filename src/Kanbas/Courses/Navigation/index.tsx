@@ -7,7 +7,6 @@ export default function CoursesNavigation() {
         </a>
       </li>
       <li>
-        
         <a id="wd-course-modules-link" href="#/Kanbas/Courses/1234/Modules">
           Modules
         </a>
