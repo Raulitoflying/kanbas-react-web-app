@@ -1,3 +1,6 @@
+import React from "react";
+
+
 export default function Images() {
   return (
     <div id="wd-images">
@@ -8,11 +11,12 @@ export default function Images() {
         id="wd-starship"
         width="400px"
         src="https://www.staradvertiser.com/wp-content/uploads/2021/08/web1_Starship-gap2.jpg"
+        alt="Starship"
       />
       <br />
       Loading a local image:
       <br />
-      <img id="wd-teslabot" src="images/teslabot.jpg" height="200px" />
+      <img id="wd-teslabot" src="/images/teslabot.jpg" height="200px" alt="Tesla Bot" />
     </div>
   );
 }
