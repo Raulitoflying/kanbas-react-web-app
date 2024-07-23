@@ -1,114 +1,43 @@
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
+import * as db from '../Database';
+
+interface Course {
+  _id: string;
+  name: string;
+  number: string;
+  startDate: string;
+  endDate: string;
+  department: string;
+  credits: number;
+  description: string;
+  image?: string;
+}
+
 export default function Dashboard() {
+  const courses = db.courses
   return (
-    <div>
+    <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
-      <h2 id="wd-dashboard-published">Published Courses (12)</h2> <hr />
-      <div id="wd-dashboard-courses">
-        <div className="wd-dashboard-course">
-          <img src="/images/reactjs.jpg" width={200} />
-          <div>
-            <a
-              className="wd-dashboard-course-link"
-              href="#/Kanbas/Courses/1234/Home"
-            >
-              CS1234 React JS
-            </a>
-            <p className="wd-dashboard-course-title">
-              Full Stack software developer
-            </p>
-            <a href="#/Kanbas/Courses/1234/Home"> Go </a>
-          </div>
+      <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2> <hr />
+      <div id="wd-dashboard-courses" className="row">
+        <div className="row row-cols-1 row-cols-md-5 g-4">
+          {courses.map((course: Course) => (
+            <div key={course._id} className="wd-dashboard-course col" style={{ width: "300px" }}>
+              <div className="card new-card"> {/* 更新类 */}
+                <Link className="wd-dashboard-course-link text-decoration-none text-dark" to={`/Kanbas/Courses/${course._id}/Home`}>
+                  <img src={`/images/${course.image}`} width="100%" alt={course.name} onError={(e) => e.currentTarget.src = '/images/default.jpg'} /> {/* 使用课程ID作为图片路径 */}
+                  <div className="card-body">
+                    <h5 className="wd-dashboard-course-title card-title">{course.name}</h5>
+                    <p className="card-text">{course.description}</p>
+                    <button className="btn btn-primary">Go</button> {/* 更新按钮类 */}
+                  </div>
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
-        <div className="wd-dashboard-course">
-          <img src="/images/reactjs.jpg" width={200} />
-          <div>
-            <a
-              className="wd-dashboard-course-link"
-              href="#/Kanbas/Courses/1234/Home"
-            >
-              CS2345 Angular
-            </a>
-            <p className="wd-dashboard-course-title">
-              Full Stack software developer
-            </p>
-            <a href="#/Kanbas/Courses/1234/Home"> Go </a>
-          </div>
-        </div>
-        <div className="wd-dashboard-course">
-          <img src="/images/reactjs.jpg" width={200} />
-          <div>
-            <a
-              className="wd-dashboard-course-link"
-              href="#/Kanbas/Courses/1234/Home"
-            >
-              CS4321 View.js
-            </a>
-            <p className="wd-dashboard-course-title">
-              Full Stack software developer
-            </p>
-            <a href="#/Kanbas/Courses/1234/Home"> Go </a>
-          </div>
-        </div>
-        <div className="wd-dashboard-course">
-          <img src="/images/reactjs.jpg" width={200} />
-          <div>
-            <a
-              className="wd-dashboard-course-link"
-              href="#/Kanbas/Courses/1234/Home"
-            >
-              CS3456 Rocket Science 101
-            </a>
-            <p className="wd-dashboard-course-title">
-              Full Stack software developer
-            </p>
-            <a href="#/Kanbas/Courses/1234/Home"> Go </a>
-          </div>
-        </div>
-        <div className="wd-dashboard-course">
-          <img src="/images/reactjs.jpg" width={200} />
-          <div>
-            <a
-              className="wd-dashboard-course-link"
-              href="#/Kanbas/Courses/1234/Home"
-            >
-              CS1234 React JS
-            </a>
-            <p className="wd-dashboard-course-title">
-              Full Stack software developer
-            </p>
-            <a href="#/Kanbas/Courses/1234/Home"> Go </a>
-          </div>
-        </div>
-        <div className="wd-dashboard-course">
-          <img src="/images/reactjs.jpg" width={200} />
-          <div>
-            <a
-              className="wd-dashboard-course-link"
-              href="#/Kanbas/Courses/1234/Home"
-            >
-              CS1234 React JS
-            </a>
-            <p className="wd-dashboard-course-title">
-              Full Stack software developer
-            </p>
-            <a href="#/Kanbas/Courses/1234/Home"> Go </a>
-          </div>
-        </div>
-        <div className="wd-dashboard-course">
-          <img src="/images/reactjs.jpg" width={200} />
-          <div>
-            <a
-              className="wd-dashboard-course-link"
-              href="#/Kanbas/Courses/1234/Home"
-            >
-              CS1234 React JS
-            </a>
-            <p className="wd-dashboard-course-title">
-              Full Stack software developer
-            </p>
-            <a href="#/Kanbas/Courses/1234/Home"> Go </a>
-          </div>
-        </div>{" "}
       </div>
     </div>
   );
