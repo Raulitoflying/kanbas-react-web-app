@@ -1,41 +1,38 @@
+import { courses, modules } from "../../Database";
+import { useParams, useLocation } from "react-router";
+import "./index.css";
+import React from "react";
+
+
 export default function CoursesNavigation() {
+  const { cid } = useParams();
+  const { pathname } = useLocation();
+  const course = courses.find((course: { _id: string }) => course._id === cid);
+  
+  const links = [
+    { name: "Home", path: "Home" },
+    { name: "Modules", path: "Modules" },
+    { name: "Piazza", path: "Piazza" },
+    { name: "Zoom", path: "Zoom" },
+    { name: "Assignments", path: "Assignments" },
+    { name: "Quizzes", path: "Quizzes" },
+    { name: "Grades", path: "Grades" },
+  ];
+
   return (
-    <ul id="wd-courses-navigation">
-      <li>
-        <a id="wd-course-home-link" href="#/Kanbas/Courses/1234/Home">
-          Home
+    <div id="wd-courses-navigation" className="list-group rounded-0">
+      {links.map((link) => (
+        <a
+          key={link.name}
+          id={`wd-course-${link.name.toLowerCase()}-link`}
+          href={`#/Kanbas/Courses/${course?._id}/${link.path}`}
+          className={`list-group-item border border-0 ${
+            pathname.includes(link.path) ? "active" : "text-danger"
+          }`}
+        >
+          {link.name}
         </a>
-      </li>
-      <li>
-        <a id="wd-course-modules-link" href="#/Kanbas/Courses/1234/Modules">
-          Modules
-        </a>
-      </li>
-      <li>
-        <a id="wd-course-piazza-link" href="#/Kanbas/Courses/1234/Piazza">
-          Piazza
-        </a>
-      </li>
-      <li>
-        <a id="wd-course-zoom-link" href="#/Kanbas/Courses/1234/Zoom">
-          Zoom
-        </a>
-      </li>
-      <li>
-        <a id="wd-course-quizzes-link" href="#/Kanbas/Courses/1234/Assignments">
-          Assignments
-        </a>
-      </li>
-      <li>
-        <a id="wd-course-assignments-link" href="#/Kanbas/Courses/1234/Quizzes">
-          Quizzes
-        </a>
-      </li>
-      <li>
-        <a id="wd-course-grades-link" href="#/Kanbas/Courses/1234/Grades">
-          Grades
-        </a>
-      </li>
-    </ul>
+      ))}
+    </div>
   );
 }
