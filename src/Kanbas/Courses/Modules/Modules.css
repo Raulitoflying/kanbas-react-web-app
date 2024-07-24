@@ -1,31 +1,130 @@
-.me-1 {
-  margin-right: 0.25rem;
+/* src/Kanbas/Courses/Modules/Modules.css */
+#wd-modules {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .wd-module {
+    margin-bottom: 1em;
+  }
+  
+  .wd-title {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+  
+  .wd-lessons {
+    list-style-type: none;
+    padding: 0 0 0 1em;
+  }
+  
+  .wd-lesson {
+    margin-bottom: 0.5em;
+  }
+  
+  .wd-content {
+    list-style-type: none;
+    padding: 0 0 0 1em;
+  }
+  
+  .wd-content-item {
+    margin-bottom: 0.25em;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .btn-secondary {
+    --bs-btn-color: #000;
+    --bs-btn-bg: #c7cdd1;
+    --bs-btn-border-color: #c7cdd1;
+    --bs-btn-hover-color: #fff;
+  }
+  
+  .bg-secondary {
+    background-color: #c7cdd1 !important;
+  }
+  
+  .border-gray {
+    border: 1px solid gray;
+  }
+  
+  .wd-title {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .wd-content-item {
+    list-style: none;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .btn-secondary {
+    --bs-btn-color: #000;
+    --bs-btn-bg: #c7cdd1;
+    --bs-btn-border-color: #c7cdd1;
+    --bs-btn-hover-color: #fff;
+  }
+  
+  .bg-secondary {
+    background-color: #c7cdd1 !important;
+  }
+  
+  .border-gray {
+    border: 1px solid gray;
+  }
+  
+  .wd-title {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .wd-content-item {
+    list-style: none;
+  }
+  
+  .wd-module .wd-lesson {
+    position: relative;
+    padding-left: 30px; /* 调整以适应点的位置 */
+    padding-right: 30px; /* 调整以适应点的位置 */
 }
 
-.position-relative {
-  position: relative;
+.wd-module .wd-lesson::before {
+    content: "•";
+    font-size: 1.5em;
+    color: green;
+    position: absolute;
+    left: 10px; /* 调整左侧位置 */
 }
 
-.position-absolute {
-  position: absolute;
+.wd-module .wd-lesson::after {
+    content: "•";
+    font-size: 1.5em;
+    color: green;
+    position: absolute;
+    right: 10px; /* 调整右侧位置 */
 }
 
-.fs-5 {
-  font-size: 1.25rem;
+/* 去掉外面的绿色点 */
+.wd-module .wd-lesson .wd-content-item::before {
+    content: none;
 }
 
-.fs-6 {
-  font-size: 1rem;
+.wd-module .wd-lesson .wd-content-item::after {
+    content: none;
 }
 
-.text-success {
-  color: #28a745 !important;
-}
-
-.text-white {
-  color: #ffffff !important;
-}
-
-.text-danger {
-  color: #dc3545 !important;
-}
