@@ -46,34 +46,40 @@ const Grades = () => {
           </thead>
           <tbody>
             <tr>
-              <td className="text-danger">Jane Adams</td>
+              <td className="text-danger">Cristiano Ronaldo</td>
               <td>100%</td>
-              <td>96.67%</td>
-              <td>92.18%</td>
-              <td>66.22%</td>
+              <td>100%</td>
+              <td>100%</td>
+              <td>100%</td>
             </tr>
             <tr>
-              <td className="text-danger">Han Bao</td>
+              <td className="text-danger">Lionel Messi</td>
               <td>100%</td>
               <td>100%</td>
-              <td><input type="text" className="form-control" value="88.03%" /></td>
+              <td><input type="text" className="form-control" value="99.99%" /></td>
               <td>98.99%</td>
             </tr>
             <tr>
-              <td className="text-danger">Mahi Sai Srinivas Bobbili</td>
+              <td className="text-danger">Joe Biden</td>
               <td>100%</td>
-              <td>96.67%</td>
-              <td>98.37%</td>
-              <td>100%</td>
+              <td>61.22%</td>
+              <td>98.07%</td>
+              <td>60.00%</td>
             </tr>
             <tr>
-              <td className="text-danger">Siran Cao</td>
+              <td className="text-danger">Chibo Cao</td>
               <td>100%</td>
-              <td>100%</td>
-              <td>100%</td>
-              <td>100%</td>
+              <td>96.00%</td>
+              <td>81.22%</td>
+              <td>33.00%</td>
             </tr>
-            {/* Add more rows as needed */}
+            <tr>
+              <td className="text-danger">David Beckham</td>
+              <td>99.99%</td>
+              <td>99.98%</td>
+              <td>99.97%</td>
+              <td>99.23%</td>
+            </tr>
           </tbody>
         </table>
       </div>
