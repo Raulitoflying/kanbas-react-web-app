@@ -1,5 +1,5 @@
 import React from 'react';
-import './SearchStyles.css'; 
+import './SearchStyles.css'; // 确保引入CSS文件
 
 export default function SearchInputs() {
   return (
