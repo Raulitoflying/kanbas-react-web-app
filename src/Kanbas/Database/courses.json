@@ -30,7 +30,7 @@
       "department": "D123",
       "credits": 4,
       "description": "This course delves into the principles and practices of spacecraft design, offering students a detailed understanding of the engineering and technology behind spacecraft systems. Key topics include spacecraft structure, propulsion, power systems, thermal control, and payload integration. Emphasizing both theoretical concepts and practical skills, the course prepares students for careers in the space industry, with a focus on innovative design and problem-solving in the context of current and future space missions",
-      "image": "reactjs.jpg"
+      "image": "spacecraft.jpg"
   },
   {
       "_id": "RS104",
@@ -41,7 +41,7 @@
       "department": "D134",
       "credits": 3,
       "description": "Organic Chemistry is an in-depth course that explores the structure, properties, composition, and reactions of organic compounds and materials. The course covers various topics including hydrocarbons, functional groups, stereochemistry, and organic synthesis techniques. Students will learn about the mechanisms of organic reactions, spectroscopic methods for structure determination, and the role of organic chemistry in biological systems. Emphasis is placed on problem-solving and laboratory skills, preparing students for advanced studies in chemistry, medicine, and related fields.",
-      "image": "reactjs.jpg"
+      "image": "organicchemistry.jpeg"
   },
   {
       "_id": "RS105",
