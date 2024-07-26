@@ -1,85 +1,57 @@
 import React from 'react';
-import './Grades.css'; // Import the CSS file for styling
+import { useParams } from 'react-router';
+import { users, assignments, enrollments, grades } from '../../Database';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaFilter, FaFileImport, FaFileExport, FaCog } from 'react-icons/fa'; // Import the icons
-import SearchInputs from './SearchInputs'; // Import the SearchInputs component
+import { FaFilter, FaFileImport, FaFileExport, FaCog } from 'react-icons/fa';
+import './Grades.css';
 
 const Grades = () => {
+  const { cid } = useParams<{ cid: string }>();
+
+  const enrolledStudents = enrollments
+    .filter(enrollment => enrollment.course === cid)
+    .map(enrollment => users.find(user => user._id === enrollment.user))
+    .filter((student): student is NonNullable<typeof student> => student !== undefined);
+
+  const courseAssignments = assignments.filter(assignment => assignment.course === cid);
+
+  const ButtonGroup = ({icon, children}: {icon: JSX.Element, children: React.ReactNode}) => (
+    <button className="btn btn-secondary">
+      {icon} {children}
+    </button>
+  );
+
   return (
     <div className="container mt-5" id="wd-grades">
       <div className="d-flex justify-content-between mb-3 align-items-center">
         <h2 className="text-dark">Grades</h2>
         <div>
-          <button className="btn btn-primary me-2">
-            <FaFileImport /> Import
-          </button>
-          <div className="btn-group">
-            <button className="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              <FaFileExport /> Export
-            </button>
-            <ul className="dropdown-menu">
-              <li><a className="dropdown-item" href="#">Option 1</a></li>
-              <li><a className="dropdown-item" href="#">Option 2</a></li>
-            </ul>
-          </div>
-          <button className="btn btn-secondary ms-2">
-            <FaCog />
-          </button>
+          <ButtonGroup icon={<FaFileImport />}>Import</ButtonGroup>
+          <ButtonGroup icon={<FaFileExport />}>Export</ButtonGroup>
+          <ButtonGroup icon={<FaCog />} children={undefined}></ButtonGroup>
         </div>
       </div>
-      <div className="d-flex justify-content-between mb-3">
-        <SearchInputs /> {/* Use the SearchInputs component */}
-      </div>
-      <button className="btn btn-secondary mb-3">
-        <FaFilter /> Apply Filters
-      </button>
+      <ButtonGroup icon={<FaFilter />}>Apply Filters</ButtonGroup>
       <div className="table-responsive">
         <table className="table table-striped table-bordered">
           <thead>
             <tr>
               <th>Student Name</th>
-              <th>A1 SETUP</th>
-              <th>A2 HTML</th>
-              <th>A3 CSS</th>
-              <th>A4 BOOTSTRAP</th>
+              {courseAssignments.map(assignment => (
+                <th key={assignment._id}>{assignment.title}</th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="text-danger">Cristiano Ronaldo</td>
-              <td>100%</td>
-              <td>100%</td>
-              <td>100%</td>
-              <td>100%</td>
-            </tr>
-            <tr>
-              <td className="text-danger">Lionel Messi</td>
-              <td>100%</td>
-              <td>100%</td>
-              <td><input type="text" className="form-control" value="99.99%" /></td>
-              <td>98.99%</td>
-            </tr>
-            <tr>
-              <td className="text-danger">Joe Biden</td>
-              <td>100%</td>
-              <td>61.22%</td>
-              <td>98.07%</td>
-              <td>60.00%</td>
-            </tr>
-            <tr>
-              <td className="text-danger">Chibo Cao</td>
-              <td>100%</td>
-              <td>96.00%</td>
-              <td>81.22%</td>
-              <td>33.00%</td>
-            </tr>
-            <tr>
-              <td className="text-danger">David Beckham</td>
-              <td>99.99%</td>
-              <td>99.98%</td>
-              <td>99.97%</td>
-              <td>99.23%</td>
-            </tr>
+            {enrolledStudents.map(student => (
+              <tr key={student._id}>
+                <td className="text-danger">{student.firstName} {student.lastName}</td>
+                {courseAssignments.map(assignment => {
+                  const grade = grades.find(grade => grade.student === student._id && grade.assignment === assignment._id);
+                  return <td key={assignment._id}>{grade ? `${grade.grade}%` : 'N/A'}</td>;
+                })}
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
