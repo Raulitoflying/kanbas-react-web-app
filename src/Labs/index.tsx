@@ -1,4 +1,4 @@
-///Users/sophiawang/2024/summer/webdev/kanbas-react-web-app/src/Labs/index.tsx
+
 
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router';
