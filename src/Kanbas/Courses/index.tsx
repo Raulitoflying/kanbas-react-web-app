@@ -7,12 +7,12 @@ import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 import Grades from "./Grades/Grades";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { courses } from "../Database";
+// import { courses } from "../Database";
 import { FaAlignJustify } from 'react-icons/fa6';
 import React from "react";
 
 
-export default function Courses() {
+export default function Courses({ courses }: { courses: any[]; }) {
   const { cid } = useParams();
   const course = courses.find((course) => course._id === cid);
   const { pathname } = useLocation();
