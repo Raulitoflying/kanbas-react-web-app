@@ -1,15 +1,17 @@
-///Users/sophiawang/2024/summer/webdev/kanbas-react-web-app/src/Kanbas/Courses/Assignments/index.tsx
-
+// src/Kanbas/Courses/Assignments/index.tsx
 import React from 'react';
-import { useParams, Link, Routes, Route } from 'react-router-dom';
+import { useParams, Link, Routes, Route, useNavigate } from 'react-router-dom';
 import AssignmentEditor from './Editor';
-import { FaSearch, FaPlus, FaCheckCircle, FaEllipsisV, FaPen } from 'react-icons/fa';
-import * as db from '../../Database'; // Import the assignments data
+import { FaSearch, FaPlus, FaCheckCircle, FaEllipsisV, FaPen, FaTrash } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteAssignment } from './reducer';
 import './Assignments.css';
 
 export default function Assignments() {
   const { cid } = useParams<{ cid: string }>(); // Get the current course ID
-  const assignments = db.assignments.filter((assignment: any) => assignment.course === cid); // Filter assignments by course ID
+  const assignments = useSelector((state: any) => state.assignments.assignments.filter((assignment: any) => assignment.course === cid)); // Filter assignments by course ID
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); // Hook to navigate programmatically
 
   return (
     <div id="wd-assignments">
@@ -19,7 +21,9 @@ export default function Assignments() {
           <input id="wd-search-assignment" placeholder="Search for Assignments" />
         </div>
         <button id="wd-add-assignment-group" className="btn btn-secondary">+ Group</button>
-        <button id="wd-add-assignment" className="btn btn-danger">+ Assignment</button>
+        <button id="wd-add-assignment" className="btn btn-danger" onClick={() => navigate('new')}>
+          + Assignment
+        </button>
       </div>
       <div id="wd-assignments-title" className="wd-assignment-title-container">
         <div className="wd-assignment-title-left">
@@ -41,7 +45,14 @@ export default function Assignments() {
                 {assignment.title}
               </Link>
               <FaCheckCircle className="wd-check-icon" />
-              <FaEllipsisV className="wd-ellipsis-icon" />
+              <FaTrash 
+                className="wd-trash-icon" 
+                onClick={() => {
+                  if (window.confirm("Are you sure you want to delete this assignment?")) {
+                    dispatch(deleteAssignment(assignment._id));
+                  }
+                }} 
+              />
             </div>
             <div className="wd-assignment-item-details">
               <span className="wd-multiple-modules">Multiple Modules</span> | Not available until May 6 at 12:00am |
@@ -54,6 +65,7 @@ export default function Assignments() {
 
       <Routes>
         <Route path=":id" element={<AssignmentEditor />} />
+        <Route path="new" element={<AssignmentEditor />} />
       </Routes>
     </div>
   );
