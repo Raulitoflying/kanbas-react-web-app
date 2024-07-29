@@ -7,7 +7,8 @@ const LandingPage: React.FC = () => {
     <div className="container mt-5">
       <div className="jumbotron text-center">
         <h1 className="display-4">Welcome to CS5610 Web Development</h1>
-        <h1 className="display-4">Bienvenue dans le développement Web CS5610</h1>
+        <h1 className="display-4">Bienvenue dans le Développement Web CS5610</h1>
+        <p className="display-4">Bienvenido al Desarrollo Web CS5610</p>
         <p className="lead"><strong>Name:</strong> Yixiang Zhou/Raul</p>
         <p><strong>Section:</strong> CS5610 Summer II</p>
       </div>
@@ -19,6 +20,7 @@ const LandingPage: React.FC = () => {
             <li className="list-group-item"><Link to="/Labs/Lab1">Lab 1</Link></li>
             <li className="list-group-item"><Link to="/Labs/Lab2">Lab 2</Link></li>
             <li className="list-group-item"><Link to="/Labs/Lab3">Lab 3</Link></li>
+            <li className="list-group-item"><Link to="/Labs/Lab4">Lab 4</Link></li>
           </ul>
         </div>
 
