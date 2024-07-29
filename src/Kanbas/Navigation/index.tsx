@@ -1,7 +1,7 @@
 import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
-import { IoCalendarOutline } from "react-icons/io5";
+import { IoAccessibility, IoCalendarOutline } from "react-icons/io5";
 import { Link, useLocation } from "react-router-dom";
 import React from "react";
 export default function KanbasNavigation() {
@@ -12,8 +12,7 @@ export default function KanbasNavigation() {
     { label: "Calendar",  path: "/Kanbas/Calendar",  icon: IoCalendarOutline },
     { label: "Inbox",     path: "/Kanbas/Inbox",     icon: FaInbox },
     { label: "Labs",      path: "/Labs",             icon: LiaCogSolid },
-    // To LandinPage
-    { label: "LandingPage", path: "/LandingPage",    icon: LiaCogSolid },
+    { label: "LandingPage", path: "/LandingPage",    icon: IoAccessibility },
   ];
   return (
     <div id="wd-kanbas-navigation" className="list-group rounded-0">
