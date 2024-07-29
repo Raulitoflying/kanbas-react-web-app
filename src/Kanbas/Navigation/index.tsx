@@ -15,7 +15,7 @@ export default function KanbasNavigation() {
     { label: "LandingPage", path: "/LandingPage",    icon: IoAccessibility },
   ];
   return (
-    <div id="wd-kanbas-navigation" className="list-group rounded-0">
+    <div id="wd-kanbas-navigation" className="list-group rounded-0" style={{ height: '100vh' }}>
       <a id="wd-account-link" target="_blank" href="https://www.northeastern.edu/"
         className="list-group-item bg-black border-0">
         <img src="/images/NEU.png" width="75px" /></a>
