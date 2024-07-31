@@ -55,9 +55,9 @@ export default function Assignments() {
               />
             </div>
             <div className="wd-assignment-item-details">
-              <span className="wd-multiple-modules">Multiple Modules</span> | Not available until May 6 at 12:00am |
+              <span className="wd-multiple-modules">Multiple Modules</span> | Not available until {assignment.availableFrom} at {assignment.availableUntil} |
               <br />
-              Due May 13 at 11:59pm | 100 pts
+              Due {assignment.dueDate} at 11:59pm | {assignment.points} pts
             </div>
           </li>
         ))}
