@@ -5,6 +5,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addAssignment, updateAssignment } from './reducer';
 import './Assignments.css';
 
+interface Assignment {
+  _id: string;
+  title: string;
+  course: string;
+  shortname: string;
+  available: string;
+  due: string;
+  pts: number;
+  description?: string;
+}
+
 export default function AssignmentEditor() {
   const { id, cid } = useParams();
   const navigate = useNavigate();
