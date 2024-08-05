@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { addAssignment, updateAssignment } from './reducer';
+import { setAssignments } from "./reducer";
+import * as client from './client';
 import './Assignments.css';
 
 interface Assignment {
@@ -17,11 +19,22 @@ interface Assignment {
 }
 
 export default function AssignmentEditor() {
-  const { id, cid } = useParams();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const assignments = useSelector((state: any) => state.assignments.assignments);
+  const { id, cid } = useParams();
+  const { assignments } = useSelector(
+      (state: any) => state.assignmentsReducer);
+  const navigate = useNavigate(); // Hook to navigate programmatically
   const [assignment, setAssignment] = useState<any>(null);
+
+  const fetchAssignments = async () => {
+    const assignments = await client.findAssignmentsForCourse(
+        cid as string
+    );
+    dispatch(setAssignments(assignments));
+    };
+    useEffect(() => {
+        fetchAssignments();
+    }, []);
 
   useEffect(() => {
     if (id === 'new') {
