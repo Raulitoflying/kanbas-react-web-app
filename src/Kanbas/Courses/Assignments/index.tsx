@@ -6,12 +6,27 @@ import { FaSearch, FaPlus, FaCheckCircle, FaEllipsisV, FaPen, FaTrash } from 're
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAssignment } from './reducer';
 import './Assignments.css';
+import { useEffect } from "react";
+import { setAssignments } from "./reducer";
+import * as client from "./client";
+
 
 export default function Assignments() {
-  const { cid } = useParams<{ cid: string }>(); // Get the current course ID
-  const assignments = useSelector((state: any) => state.assignments.assignments.filter((assignment: any) => assignment.course === cid)); // Filter assignments by course ID
   const dispatch = useDispatch();
+  const { cid } = useParams();
+  const { assignments } = useSelector(
+      (state: any) => state.assignmentsReducer);
   const navigate = useNavigate(); // Hook to navigate programmatically
+
+  const fetchAssignments = async () => {
+    const assignments = await client.findAssignmentsForCourse(
+        cid as string
+    );
+    dispatch(setAssignments(assignments));
+    };
+    useEffect(() => {
+        fetchAssignments();
+    }, []);
 
   return (
     <div id="wd-assignments">
