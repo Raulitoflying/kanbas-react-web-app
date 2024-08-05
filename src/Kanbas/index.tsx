@@ -1,13 +1,13 @@
 //src/Kanbas/index.tsx
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router';
 import { Provider } from 'react-redux';
+import * as client from "./Courses/client";
 import store from './store';
 import Dashboard from './Dashboard';
 import Courses from './Courses';
 import KanbasNavigation from './Navigation';
-import { courses as dbCourses } from './Database';
 import './styles.css'; // Ensure this path is correct
 
 interface Course {
@@ -23,8 +23,8 @@ interface Course {
 }
 
 export default function Kanbas() {
-  const [courses, setCourses] = useState<Course[]>(dbCourses);
-  const [course, setCourse] = useState<Course>({
+  const [courses, setCourses] = useState<any[]>([]);
+  const [course, setCourse] = useState<any>({
     _id: "0",
     name: "New Course",
     number: "New Number",
@@ -36,30 +36,39 @@ export default function Kanbas() {
     credits: 3,
   });
 
-  const addNewCourse = () => {
-    const newCourse = { ...course, _id: new Date().getTime().toString(), image: "reactjs.jpg" };
+  const addNewCourse = async () => {
+    const newCourse = await client.createCourse(course);
     setCourses([...courses, newCourse]);
   };
 
-  const deleteCourse = (courseId: string) => {
-    setCourses(courses.filter((course) => course._id !== courseId));
+  const deleteCourse = async (courseId: string) => {
+    await client.deleteCourse(courseId);
+    setCourses(courses.filter((c) => c._id !== courseId));
   };
 
-  const updateCourse = () => {
-    setCourses(courses.map((c) => (c._id === course._id ? course : c)));
-    setCourse({
-      _id: "0",
-      name: "New Course",
-      number: "New Number",
-      startDate: "2023-09-10",
-      endDate: "2023-12-15",
-      image: "reactjs.jpg",
-      description: "New Description",
-      department: "New Department",
-      credits: 3,
-    });
+  const updateCourse = async () => {
+    await client.updateCourse(course);
+    setCourses(
+      courses.map((c) => {
+        if (c._id === course._id) {
+          return course;
+        } else {
+          return c;
+        }
+      })
+    );
   };
 
+  const fetchCourses = async () => {
+    const courses = await client.fetchAllCourses();
+    setCourses(courses);
+  };
+  useEffect(() => {
+    fetchCourses();
+  }, []);
+
+  
+  
   return (
     <Provider store={store}>
       <div id="wd-kanbas" className="d-flex">
