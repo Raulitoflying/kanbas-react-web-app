@@ -1,87 +1,90 @@
-// src/Kanbas/Courses/Assignments/index.tsx
-import React from 'react';
-import { useParams, Link, Routes, Route, useNavigate } from 'react-router-dom';
-import AssignmentEditor from './Editor';
-import { FaSearch, FaPlus, FaCheckCircle, FaEllipsisV, FaPen, FaTrash } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteAssignment } from './reducer';
-import './Assignments.css';
+import { BsGripVertical } from "react-icons/bs";
+import AssignmentsControls from "./AssignmentsControls";
+import AssignmentControlButtons from "./AssignmentControlButtons";
+import { TbFilePencil } from "react-icons/tb";
+import { useParams } from "react-router";
 import { useEffect } from "react";
 import { setAssignments } from "./reducer";
+import { useSelector, useDispatch } from "react-redux";
 import * as client from "./client";
 
-
 export default function Assignments() {
-  const dispatch = useDispatch();
-  const { cid } = useParams();
-  const { assignments } = useSelector(
-      (state: any) => state.assignmentsReducer);
-  const navigate = useNavigate(); // Hook to navigate programmatically
-
-  const fetchAssignments = async () => {
-    const assignments = await client.findAssignmentsForCourse(
-        cid as string
+    const dispatch = useDispatch();
+    const { cid } = useParams();
+    const { assignments } = useSelector(
+        (state: any) => state.assignmentsReducer
     );
-    dispatch(setAssignments(assignments));
+    const fetchAssignments = async () => {
+        const assignments = await client.findAssignmentsForCourse(
+            cid as string
+        );
+        dispatch(setAssignments(assignments));
     };
     useEffect(() => {
         fetchAssignments();
     }, []);
-
-  return (
-    <div id="wd-assignments">
-      <div className="wd-assignments-header">
-        <div className="wd-search-container">
-          <FaSearch className="wd-search-icon" />
-          <input id="wd-search-assignment" placeholder="Search for Assignments" />
+    return (
+        <div id="wd-assignments">
+            <br />
+            <AssignmentsControls />
+            <br />
+            <ul id="wd-assignments" className="list-group rounded-0">
+                <li className="wd-assignment list-group-item p-0 mb-5 fs-5 border-gray">
+                    <div className="wd-title p-3 ps-2 bg-secondary">
+                        <BsGripVertical className="me-2 fs-3" />
+                        ASSIGNMENTS 40% of Total
+                    </div>
+                    <ul
+                        id="wd-assignment-list"
+                        className="wd-assignment-list list-group rounded-0"
+                    >
+                        {assignments.map((assignment: any) => (
+                            <li className="wd-assignment-list-item list-group-item p-3 ps-1 d-flex align-items-center">
+                                <BsGripVertical className="me-2 fs-3" />
+                                <TbFilePencil
+                                    className="me-3 fs-3"
+                                    style={{ color: "green" }}
+                                />
+                                <div>
+                                    <a
+                                        className="wd-assignment-link"
+                                        href={`#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}
+                                        style={{
+                                            color: "#212529",
+                                            fontWeight: "bold",
+                                            textDecoration: "none",
+                                        }}
+                                    >
+                                        {assignment.title}
+                                    </a>
+                                    <br />
+                                    <span style={{ color: "red" }}>
+                                        Multiple Modules
+                                    </span>{" "}
+                                    |{" "}
+                                    <span
+                                        style={{
+                                            fontWeight: "bold",
+                                            color: "grey",
+                                        }}
+                                    >
+                                        Not Available until
+                                    </span>{" "}
+                                    {assignment.available} |
+                                    <br />
+                                    Due {assignment.due} | {assignment.points}{" "}
+                                    pts
+                                </div>
+                                <div className="ms-auto d-flex">
+                                    <AssignmentControlButtons
+                                        assignmentId={assignment._id}
+                                    />
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </li>
+            </ul>
         </div>
-        <button id="wd-add-assignment-group" className="btn btn-secondary">+ Group</button>
-        <button id="wd-add-assignment" className="btn btn-danger" onClick={() => navigate('new')}>
-          + Assignment
-        </button>
-      </div>
-      <div id="wd-assignments-title" className="wd-assignment-title-container">
-        <div className="wd-assignment-title-left">
-          <FaEllipsisV className="wd-drag-icon" />
-          <span className="wd-assignment-title-text">ASSIGNMENTS</span>
-        </div>
-        <div className="wd-assignment-title-right">
-          <span className="wd-assignment-percentage">40% of Total</span>
-          <FaPlus className="wd-add-icon" />
-          <FaEllipsisV className="wd-more-icon" />
-        </div>
-      </div>
-      <ul id="wd-assignment-list">
-        {assignments.map((assignment: any) => (
-          <li key={assignment._id} className="wd-assignment-list-item">
-            <div className="wd-assignment-item-header">
-              <FaPen className="wd-pen-icon" />
-              <Link className="wd-assignment-link" to={assignment._id}>
-                {assignment.title}
-              </Link>
-              <FaCheckCircle className="wd-check-icon" />
-              <FaTrash 
-                className="wd-trash-icon" 
-                onClick={() => {
-                  if (window.confirm("Are you sure you want to delete this assignment?")) {
-                    dispatch(deleteAssignment(assignment._id));
-                  }
-                }} 
-              />
-            </div>
-            <div className="wd-assignment-item-details">
-              <span className="wd-multiple-modules">Multiple Modules</span> | Not available until {assignment.availableFrom} at {assignment.availableUntil} |
-              <br />
-              Due {assignment.dueDate} at 11:59pm | {assignment.points} pts
-            </div>
-          </li>
-        ))}
-      </ul>
-
-      <Routes>
-        <Route path=":id" element={<AssignmentEditor />} />
-        <Route path="new" element={<AssignmentEditor />} />
-      </Routes>
-    </div>
-  );
+    );
 }
