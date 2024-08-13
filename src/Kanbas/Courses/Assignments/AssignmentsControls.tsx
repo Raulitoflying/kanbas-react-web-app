@@ -1,51 +1,31 @@
-import { FaPlus } from "react-icons/fa6";
-import { MdDoNotDisturbAlt } from "react-icons/md";
-import { FaSearch } from "react-icons/fa";
-import "./Assignments.css";
-import { Link, useParams } from "react-router-dom";
-
-export default function AssignmentControls() {
-    const { cid } = useParams();
-    return (
-        <div
-            id="wd-modules-controls"
-            className="text-nowrap"
-            style={{ display: "flex", justifyContent: "space-between" }}
-        >
-            <div className="input-group" style={{ width: "330px" }}>
-                <span className="input-group-text">
-                    <FaSearch />
-                </span>
-                <input
-                    type="text"
-                    className="form-control me-1"
-                    placeholder="Search..."
-                />
-            </div>
-            <div>
-                <button
-                    id="wd-add-module-btn"
-                    className="btn btn-lg btn-danger me-1"
-                >
-                    <FaPlus
-                        className="position-relative me-2"
-                        style={{ bottom: "1px" }}
-                    />
-                    Group
-                </button>
-                <Link to={`/Kanbas/Courses/${cid}/Assignments/New`}>
-                    <button
-                        id="wd-add-module-btn"
-                        className="btn btn-lg btn-light me-1"
-                    >
-                        <FaPlus
-                            className="position-relative me-2"
-                            style={{ bottom: "1px" }}
-                        />
-                        Assignment
-                    </button>
-                </Link>
-            </div>
-        </div>
-    );
+import { FaSearch, FaPlus } from 'react-icons/fa';
+interface AssignmentsControlsProps {
+  onAddAssignment: () => void;
+}
+export default function AssignmentsControls({ onAddAssignment }: AssignmentsControlsProps) {
+  return (
+    <div className="d-flex align-items-center justify-content-start pb-1 mb-3 text-nowrap">
+      <div className="input-group me-5">
+        <span className="input-group-text bg-white border-end-0">
+          <FaSearch />
+        </span>
+        <input
+          type="text"
+          id="wd-search-assignment"
+          className="form-control border-start-0"
+          placeholder="Search..."
+        />
+      </div>
+      <div className="d-flex  mb-3">
+        <button id="wd-add-assignment-group" className="btn btn-lg btn-secondary me-1 float-end d-flex align-items-center">
+          <FaPlus className="me-1" /> 
+          <span>Group</span>
+        </button>
+        <button id="wd-add-assignment" className="btn btn-lg btn-danger me-1 float-end" onClick={onAddAssignment} >
+          <FaPlus className="me-1" /> 
+          <span>Assignment</span>
+        </button>
+      </div>
+    </div>
+  )
 }
