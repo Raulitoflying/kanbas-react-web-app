@@ -5,8 +5,9 @@ import accountReducer from "./Account/reducer";
 const store = configureStore({
   reducer: {
     modulesReducer,
-    assignmentsReducer,
+    assignments: assignmentsReducer,
     accountReducer,
   },
 });
+
 export default store;
